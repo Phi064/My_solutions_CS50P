@@ -8,21 +8,23 @@ def main():
 
 def is_valid(s):
     digit = 0
-    if s[0:2].isupper() == False or 2 > len(s) > 6: # Comprpueba que las 2 primeras son letras y que tiene mínimo 2 carácteres y máximo 6
+    if s[0:2].isupper() == False or 2 > len(s) or len(s) > 6: # Comprueba que las 2 primeras son letras y que tiene mínimo 2 carácteres y máximo 6
         return False
     
     if s.isalnum() != True: # Comprueba que no haya puntos, espacios, etc
         return False
     
     for letter in s:
-        if letter.isalpha() == False and letter != '0': # Comprueba si es número y no es 0
-            digit += 1
-            if letter.isalpha() == True and digit > 0: # Si hay una letra, y ya habido anteriormente un número, devuelve False
+        if letter.isalpha() == False and digit == 0:
+            if int(letter) != 0: 
+                digit += 1
+            elif int(letter) == 0 and digit == 0:
                 return False
-            else:
-                return True
-        else:
-            return False
+
+        if letter.isalpha() == True and digit > 0: 
+                    return False
+            
+    return True
             
 main()
 
